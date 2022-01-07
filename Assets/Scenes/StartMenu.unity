@@ -206,6 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 863753925}
   infoText: {fileID: 1532987900}
+  playerName: 
 --- !u!4 &96559744
 Transform:
   m_ObjectHideFlags: 0

@@ -12,20 +12,30 @@ using UnityEditor;
 
 public class StartMenuManager : MonoBehaviour
 {
-    public TMP_InputField nameText;
-    public TextMeshProUGUI infoText;
-
+    public static StartMenuManager Instance;
+    [SerializeField] TMP_InputField nameText;
+    [SerializeField] TextMeshProUGUI infoText;
+    //public string playerName { get; private set; }
+    public static string playerName { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void StartGame()
     {
         if (nameText.text.Length > 0)
         {
+            playerName = nameText.text;
             infoText.gameObject.SetActive(false);
             SceneManager.LoadScene(1);
         }
