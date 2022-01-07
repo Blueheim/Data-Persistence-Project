@@ -39,6 +39,11 @@ public class MainManager : MonoBehaviour
         }
         m_Points = 0;
         ScoreText.text = $"{StartMenuManager.playerName} - Score : {m_Points}";
+        if (StartMenuManager.topScores != null && StartMenuManager.topScores.Count > 0)
+        {
+
+            BestScoreText.text = $"Best Score : {StartMenuManager.topScores[0].playerName} : {StartMenuManager.topScores[0].points}";
+        }
     }
 
     private void Update()
@@ -75,6 +80,7 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
-        //BestScoreText = $"Best Score : {StartMenuManager.playerName} : ";
+        StartMenuManager.Instance.SaveScore(m_Points);
+        BestScoreText.text = $"Best Score : {StartMenuManager.topScores[0].playerName} : {StartMenuManager.topScores[0].points}";
     }
 }
