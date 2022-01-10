@@ -1,23 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
 using System.IO;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-
-[DefaultExecutionOrder(1000)]
 
 public class StartMenuManager : MonoBehaviour
 {
     public static StartMenuManager Instance;
-    [SerializeField] TMP_InputField nameText;
-    [SerializeField] TextMeshProUGUI infoText;
-    //public string playerName { get; private set; }
-    public static string playerName { get; private set; }
+    public string playerName;
+
     public static List<Score> topScores { get; private set; } = new List<Score>();
 
     void Awake()
@@ -31,20 +21,6 @@ public class StartMenuManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         LoadTopScores();
-    }
-
-    public void StartGame()
-    {
-        if (nameText.text.Length > 0)
-        {
-            playerName = nameText.text;
-            infoText.gameObject.SetActive(false);
-            SceneManager.LoadScene(1);
-        }
-        else
-        {
-            infoText.gameObject.SetActive(true);
-        }
     }
 
     [System.Serializable]
@@ -110,12 +86,5 @@ public class StartMenuManager : MonoBehaviour
         }
     }
 
-    public void ExitGame()
-    {
-#if UNITY_EDITOR
-        EditorApplication.ExitPlaymode();
-#else
-        Application.Quit();
-#endif
-    }
+
 }
